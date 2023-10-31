@@ -226,47 +226,7 @@ public class CircularlyLinkedList<E> {
   }//removeFirst
   
   public void exchange(String player1, String player2) {
-    // Find the positions of the players in the list
-    int player1Index = -1;
-    int player2Index = -1;
-    Node<E> current = entry;
-    
-    for (int i = 0; i < size; i++) {
-        if (current.getElement().equals(player1)) {
-            player1Index = i;
-        } else if (current.getElement().equals(player2)) {
-            player2Index = i;
-        }
-        current = current.getNext();
-    }
-    
-    if (player1Index == -1 || player2Index == -1) {
-        // One or both players not found in the list
-        System.out.println("One or both players not found in the list.");
-        return;
-    }
-    
-    if (player1Index > player2Index) {
-        int temp = player1Index;
-        player1Index = player2Index;
-        player2Index = temp;
-    }
-    
-    Node<E> player1Node = entry;
-    Node<E> player2Node = entry;
-    
-    for (int i = 0; i < player1Index; i++) {
-        player1Node = player1Node.getNext();
-    }
-    
-    for (int i = 0; i < player2Index; i++) {
-        player2Node = player2Node.getNext();
-    }
-    
-    Node<E> temp = player1Node.getNext();
-    player1Node.setNext(player2Node.getNext());
-    player2Node.setNext(temp);
-}
+  
 
   /**
    * Produces a string representation of the contents of the list.
