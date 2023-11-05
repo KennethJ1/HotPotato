@@ -225,7 +225,47 @@ public class CircularlyLinkedList<E> {
     return head.getElement();
   }//removeFirst
   
-  
+    public boolean exchange(String playerName1, String playerName2) {
+        Node<E> prev1 = entry;
+        Node<E> player1 = entry.getNext();
+        Node<E> prev2 = entry; 
+        Node<E> player2 = entry.getNext();
+        boolean foundPlayer1 = false; 
+        boolean foundPlayer2 = false; 
+        if (size == 0) {
+            System.out.println("No players to swap");
+            return false;
+        }
+        //search for first player in list
+        while (player1 != entry){
+            if(player1 .getElement().equals(playerName1)){
+                foundPlayer1 = true; 
+                break; 
+            }//if
+            prev1 = player1; 
+            player1 = player1.getNext();
+        }//while
+        
+        while(player2 != entry){
+            if(player2.getElement().equals(playerName2)){
+                foundPlayer2 = true;
+                break;
+            }//if
+            prev2 = player2; 
+            player2 = player2.getNext();
+        }//while
+        
+        
+        if(foundPlayer1 = true && foundPlayer2 == true){
+            
+        }
+       return true;
+    }
+     
+     
+      
+      
+
   
 
   /**
