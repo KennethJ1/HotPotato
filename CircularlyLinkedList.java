@@ -225,7 +225,7 @@ public class CircularlyLinkedList<E> {
     return head.getElement();
   }//removeFirst
   
-  public void exchange(String player1, String player2) {
+  
   
 
   /**
@@ -251,3 +251,4 @@ public class CircularlyLinkedList<E> {
     return sb.toString();
   }//toString
 }//class CircularlyLinkedList
+  

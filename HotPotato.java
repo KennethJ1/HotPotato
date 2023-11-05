@@ -52,8 +52,8 @@ public class HotPotato {
                  // Get the player with the potato
                 System.out.println("Has potato: " + currentPlayer);
             }
-            currentPlayer = playerList.getFirstElement();
-            System.out.println("Has potato: " + currentPlayer);
+            
+            System.out.println("Has potato: " + playerList.getFirstElement());
             System.out.println("STOP!");
             
             
@@ -66,10 +66,28 @@ public class HotPotato {
         }
 }
 
-    public static int randomTimesInput(Scanner scanner) {
+   public static int randomTimesInput(Scanner scanner) {
+    int randomMoves = 0;
+    boolean isValidInput = false;
+
+    while (!isValidInput) {
         System.out.print("Random time: ");
-        return scanner.nextInt(20);
+
+        if (scanner.hasNextInt()) {
+            randomMoves = scanner.nextInt();
+            if (randomMoves >= 1 && randomMoves <= 20) {
+                isValidInput = true;
+            } else {
+                System.out.println("Please enter a number between 1 and 20.");
+            }
+        } else {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            scanner.next(); // Consume invalid input
+        }
     }
+
+    return randomMoves;
+}
 
     public static int numPlayers(Scanner scanner) {
         System.out.println("Please enter the number of players: ");
