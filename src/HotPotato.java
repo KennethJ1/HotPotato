@@ -1,4 +1,4 @@
-package HotPotato;
+package HotPotato.src;
 
 /**
  *This program runs the hot potato game, prompting the user to input 

@@ -1,4 +1,4 @@
-package HotPotato;
+package HotPotato.src;
 /**
  * This file is mostly credited to Michael T. Goodrich, Roberto Tamassia, 
  * Michael H.Goldwasser as part of their book:
@@ -303,12 +303,12 @@ public class CircularlyLinkedList<E> {
         // As this will need to be adjusted to point to the swapped player, in this
         // instance if we are swapping who: A and with: C:
         // 1. The element before C will need to point to A
-        
+
         // If 0 ( empty ) or just 1 player, return do nothing
-        if ( size < 2){
+        if (size < 2) {
             return;
         }
-        if ( size == 2 ){
+        if (size == 2) {
             // Just two players, swapping should be rotating the list A->B ==> B->A
             rotateCCW();
         }
@@ -317,44 +317,64 @@ public class CircularlyLinkedList<E> {
         // player2: C
         var before_player1 = entry; // C
         var player1 = entry.getNext(); // A
-        while(!player1.getElement().equals(player1Name)){
+        while (!player1.getElement().equals(player1Name)) {
             before_player1 = player1;
             player1 = player1.getNext();
         }
 
         var before_player2 = entry; // B
         var player2 = entry.getNext(); // C
-        while(!player2.getElement().equals(player2Name))
-        {
+        while (!player2.getElement().equals(player2Name)) {
             before_player2 = player2;
             player2 = player2.getNext();
         }
 
-
         var player1WasLastAndPlayer2WasFirst = false;
-        if (player1==entry && player2==entry.getNext()){
+        if (player1 == entry && player2 == entry.getNext()) {
             player1.setNext(null);
-            player1WasLastAndPlayer2WasFirst=true;
+            player1WasLastAndPlayer2WasFirst = true;
         }
         var player2WasLastAndPlayer1WasFirst = false;
-        if (player2==entry && player1==entry.getNext()){
+        if (player2 == entry && player1 == entry.getNext()) {
             player2.setNext(null);
-            player2WasLastAndPlayer1WasFirst=true;
+            player2WasLastAndPlayer1WasFirst = true;
         }
-        // A->B->C
-        before_player1.setNext(player2); // A -> C
-        player2.setNext(player1.getNext()); // C -> C
 
-        before_player2.setNext(player1); // B -> B
-        player1.setNext(player2.getNext()); // B -> C
-        // A->C->B
-        if (player1WasLastAndPlayer2WasFirst){
+        var player1WasLast = false;
+        if ( player1 == entry){
+            player1WasLast=true;
+        }
+        var player2WasLast = false;
+        if ( player2 == entry){
+            player2WasLast=true;
+        }
+
+        // p2:A->p1:B->C->D* || B->A->C->D* || B->A->D->C
+        before_player1.setNext(player2); // A->A || D->A->A->A
+        var whatPlayer2UsedToPointTo = player2.getNext(); // A
+        if (player1.getNext() == player2) {
+            player2.setNext(player1);
+        } else {
+            player2.setNext(player1.getNext()); // A -> C || D->A->C-D-A
+        }
+
+        before_player2.setNext(player1); // D->B | D->B->C->D->B->C
+        player1.setNext(whatPlayer2UsedToPointTo); // B->A | D->B->A->C->D->B
+
+        if (player1WasLastAndPlayer2WasFirst) {
             player2.setNext(player1);
             entry = player2;
         }
-        if (player2WasLastAndPlayer1WasFirst){
+        if (player2WasLastAndPlayer1WasFirst) {
             player1.setNext(player2);
             entry = player1;
+        }
+
+        if (player1WasLast){
+            entry=player2;
+        }
+        if (player2WasLast){
+            entry=player1;
         }
 
     }
